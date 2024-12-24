@@ -1,6 +1,6 @@
-// app/ratings/page.tsx
-
-import React from "react";
+// app/(dashboard)/list/ratings/page.tsx
+"use client"
+import React, { useEffect, useState } from "react";
 import { fetchRatings } from "@/services/api"; // Import the fetchRatings function
 
 interface Rating {
@@ -11,24 +11,22 @@ interface Rating {
   date: string;
 }
 
-const RatingsListPage = async () => {
-  // Fetch ratings data from the API
-  const ratings: Rating[] = await fetchRatings();
+const RatingsListPage = () => {
+  const [ratings, setRatings] = useState<Rating[]>([]);
 
+  // Fetch ratings on page load
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const fetchedRatings = await fetchRatings();
+        setRatings(fetchedRatings);
+      } catch (error) {
+        console.error("Error fetching ratings:", error);
+      }
+    };
 
-  const handleRatings = (rating: string) => {
-
-    if(rating === "5"){
-      return "Excellent"
-    }else if(rating === "4"){
-      return "Good"
-    }else if(rating === "3"){
-      return "Average"
-    }else{
-      return "Poor"
-    }
-
-  }
+    fetchData();
+  }, []); // Empty dependency array to run only once on component mount
 
   return (
     <div className="p-6 font-sans">
@@ -50,7 +48,7 @@ const RatingsListPage = async () => {
                 className={`${index % 2 === 0 ? "" : "bg-lamaSkyLight"}`}
               >
                 <td className="px-4 py-2 text-left">{rating.user}</td>
-                <td className="px-4 py-2 text-left">{handleRatings(rating.rating)}</td>
+                <td className="px-4 py-2 text-left">{rating.rating}</td>
                 <td className="px-4 py-2 text-left">{rating.comment}</td>
                 <td className="px-4 py-2 text-left">{rating.date}</td>
               </tr>

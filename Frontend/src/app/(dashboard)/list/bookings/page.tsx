@@ -1,7 +1,8 @@
 // app/bookings/page.tsx
+"use client"
 
-import React from "react";
-import { fetchBookings } from "@/services/api";  // Import the fetchBookings function
+import React, { useEffect, useState } from "react";
+import { fetchBookings } from "@/services/api"; // Import the fetchBookings function
 
 interface Booking {
   _id: string;
@@ -12,9 +13,22 @@ interface Booking {
   phone: string;
 }
 
-const BookingsListPage = async () => {
-  // Fetching bookings data from the API
-  const bookings: Booking[] = await fetchBookings();
+const BookingsListPage = () => {
+  const [bookings, setBookings] = useState<Booking[]>([]);
+
+  // Fetching bookings data on component mount
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const fetchedBookings = await fetchBookings();
+        setBookings(fetchedBookings);
+      } catch (error) {
+        console.error("Error fetching bookings:", error);
+      }
+    };
+
+    fetchData();
+  }, []); // Empty dependency array to only run once on mount
 
   return (
     <div className="p-6 font-sans">
