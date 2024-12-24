@@ -1,0 +1,60 @@
+version: "3.8"
+
+services:
+
+  ui-service:
+    build: .
+    container_name: ui-service
+    hostname: ui-service
+    ports:
+      - 3000:3000
+    extra_hosts:
+      - 'host.docker.internal:host-gateway'
+    expose:
+      - 3000
+    environment:
+      NEXT_PUBLIC_API_URL: "https://api.example.com"
+    
+  sms-ui-service:
+      image: touchvaske/sms-ui-service:dev
+      container_name: sms-ui-service
+      hostname: sms-ui-service
+      ports:
+        - 2098:80
+      extra_hosts:
+        - 'host.docker.internal:host-gateway'
+      expose:
+        - 80
+      environment:
+        UPTRACE_DSN: https://BB8_WAMP9dvzDIsEkellJg@api.uptrace.dev?grpc=4317
+
+  watchtower:
+    container_name: watchtower
+    image: containrrr/watchtower
+    environment:
+      - WATCHTOWER_CLEANUP=true
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./config/docker.json:/config.json
+
+    command: --interval 10 --debug
+
+
+networks:
+  djohnmash:
+    driver: bridge
+
+volumes:
+  ch_data:
+  pg_data1:
+  prometheus_data:
+  vol-emqx-data:
+    name: foo-emqx-data
+  vol-emqx-etc:
+    name: foo-emqx-etc
+  vol-emqx-log:
+    name: foo-emqx-log
+  cache:
+    driver: local
+  redis-cache:
+    driver: local
