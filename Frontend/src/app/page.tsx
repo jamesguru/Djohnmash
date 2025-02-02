@@ -176,11 +176,11 @@ const Homepage = () => {
         </video>
         {/* Logo */}
         <div className="absolute top-4 left-4 sm:top-8 sm:left-10 z-30">
-          <img src="/logo1.png" alt="Logo" className="h-[100px] sm:h-[200px] md:h-[150px] lg:h-[200px]" />
+          <img src="/logo1.png" alt="Logo" className="h-[250px] sm:h-[200px] md:h-[150px] lg:h-[200px]" />
         </div>
 
-         {/* Call Now Button - Positioned at the bottom on small screens */}
-         <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 z-[999] sm:bottom-10 sm:left-auto sm:right-10 sm:transform-none">
+        {/* Call Now Button - Positioned at the bottom on small screens */}
+        <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 z-[999] sm:bottom-10 sm:left-auto sm:right-10 sm:transform-none">
           <a
             href="tel:254757939067"
             className="bg-[#C8A560] text-white font-semibold px-4 py-2 sm:px-6 sm:py-3 rounded-lg shadow-lg hover:bg-[#D4AF37] transition duration-300 flex items-center space-x-2 text-sm sm:text-base"
@@ -202,8 +202,6 @@ const Homepage = () => {
             <span>Call Now: 254 757 939 067</span>
           </a>
         </div>
-
-
 
         <div className="absolute inset-0 bg-black bg-opacity-70 flex flex-col justify-center items-center text-center px-4 sm:px-6 z-10">
           <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-[#C8A560] mb-4">
@@ -510,9 +508,9 @@ const Homepage = () => {
             <div className="mb-8 sm:mb-0">
               <h3 className="text-xl font-bold mb-4">Contact Us</h3>
               <ul className="text-gray-400">
-                <li className="mb-2">Address: Murang'a, Thika Town, Thika</li>
+                <li className="mb-2">Address: Uhuru St, in the building opposite Family Bank, Second Floor, Thika</li>
                 <li className="mb-2">Phone: <a href="tel:254757939067" className="hover:text-[#D4AF37]">254 757 939 067</a></li>
-                <li className="mb-2">Email: <a href="mailto:info@massageparlor.com" className="hover:text-[#D4AF37]">niccydjonsspa@gmail.com</a></li>
+                <li className="mb-2">Email: <a href="mailto:niccydjonsspa@gmail.com" className="hover:text-[#D4AF37]">niccydjonsspa@gmail.com</a></li>
               </ul>
             </div>
 

@@ -2,7 +2,7 @@
 import axios from "axios";
 
 
-const NEXT_PUBLIC_API_BASE_URL="https://api.djohnmash.com/api/v1"
+const NEXT_PUBLIC_API_BASE_URL="https://api.niccydjonsspa.com/api/v1"
 
 const api = axios.create({
   baseURL: NEXT_PUBLIC_API_BASE_URL,
