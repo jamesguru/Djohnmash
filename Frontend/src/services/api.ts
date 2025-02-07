@@ -1,7 +1,6 @@
 // services/api.js
 import axios from "axios";
 
-
 const NEXT_PUBLIC_API_BASE_URL="https://api.niccydjonsspa.com/api/v1"
 
 const api = axios.create({
@@ -13,7 +12,7 @@ const api = axios.create({
 
 export const getServices = async () => {
   try {
-    const response = await api.get("/services");
+    const response = await api.get("/service");
     return response.data;
   } catch (error) {
     console.error("Error fetching services:", error);
@@ -42,6 +41,28 @@ export const addMember = async (data:any) => {
       throw error;
     }
   };
+
+  export const addService = async (data:any) => {
+    console.log(data)
+    try {
+      const response = await api.post("/service", data);
+      return response.data;
+    } catch (error) {
+      console.error("Error booking appointment:", error);
+      throw error;
+    }
+  };
+
+
+  export const fetchServices = async () => {
+    try {
+      const response = await api.get("/service");
+      return response.data;
+    } catch (error) {
+      console.error("Error getting services:", error);
+      throw error;
+    }
+  };
   
 
 
@@ -55,6 +76,8 @@ export const leaveRating = async (data:any) => {
       throw error;
     }
   };
+
+  
 
 
   export const login = async (data:any) => {
@@ -109,5 +132,8 @@ export const fetchRatings = async () => {
     throw error;
   }
 };
+
+
+
 
 

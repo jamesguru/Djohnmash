@@ -176,7 +176,7 @@ const Homepage = () => {
         </video>
         {/* Logo */}
         <div className="absolute top-4 left-4 sm:top-8 sm:left-10 z-30">
-          <img src="/logo1.png" alt="Logo" className="h-[250px] sm:h-[200px] md:h-[150px] lg:h-[200px]" />
+          <img src="/logo1.png" alt="Logo" className="h-[100px] sm:h-[100px] md:h-[150px] lg:h-[200px]" />
         </div>
 
         {/* Call Now Button - Positioned at the bottom on small screens */}
@@ -208,7 +208,7 @@ const Homepage = () => {
             Relax, Rejuvenate, Revitalize
           </h1>
           <p className="text-base sm:text-lg md:text-xl text-[#C8A560] text-gray-300 mb-6">
-            Experience the best massage in town
+          Where style meets serenity
           </p>
 
           <button

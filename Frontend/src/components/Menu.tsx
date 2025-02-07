@@ -40,7 +40,7 @@ const Menu = () => {
         {
           icon: "/class.png",
           label: "Services",
-          href: "/list/classes",
+          href: "/list/services",
           visible: ["admin", "teacher"],
         },
         {
