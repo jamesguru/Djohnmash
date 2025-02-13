@@ -90,42 +90,74 @@ const MassageServiceListPage = () => {
   const generatePDF = () => {
     const doc = new jsPDF();
     const imgUrl = "https://res.cloudinary.com/dap91fhxh/image/upload/v1738954676/logo1_nojit1.png";
-    
+
+    // Load the font (Make sure the TTF file is properly converted and included)
+    doc.addFileToVFS("DancingScript.ttf", "<base64-font-data>");
+    doc.addFont("DancingScript.ttf", "DancingScript", "normal");
+
     const img = new Image();
     img.src = imgUrl;
     img.onload = () => {
-      let aspectRatio = img.width / img.height;
-      let imgWidth = 40;
-      let imgHeight = imgWidth / aspectRatio;
-      doc.addImage(imgUrl, "PNG", 150, 5, imgWidth, imgHeight);
-      doc.setTextColor("#D4AF37");
-      doc.setFontSize(18);
-      
-      const visibleRows = filteredRows;
-      const totalAmount = visibleRows.reduce((sum, row) => sum + row.amount + row.tip, 0);
-      const discountAmount = discount ? (totalAmount * Number(discount)) / 100 : 0;
-      
-      autoTable(doc, {
-        head: [["Therapist", "Service Offered", "Date", "Amount (Ksh)", "Tip Left (Ksh)"]],
-        body: visibleRows.map(row => [row.name, row.service, row.date, row.amount, row.tip]),
-        startY: imgHeight + 20,
-        theme: "grid",
-        styles: { fontSize: 12 },
-        headStyles: { fillColor: "#000000", textColor: "#D4AF37" },
-      });
-      
-      const finalY = (doc as any).lastAutoTable?.finalY || imgHeight + 30;
-      doc.setTextColor("#D4AF37");
-      doc.setFontSize(14);
-      doc.text(`Total Amount: Ksh ${totalAmount}`, 14, finalY + 10);
-      if (discount) {
-        doc.text(`Payout percentage: ${discount}%`, 14, finalY + 20);
-        doc.text(`Final Amount: Ksh ${discountAmount}`, 14, finalY + 30);
-      }
-      
-      doc.save("massage_services.pdf");
+        let aspectRatio = img.width / img.height;
+        let imgWidth = 40;
+        let imgHeight = imgWidth / aspectRatio;
+
+        // Add logo
+        doc.addImage(imgUrl, "PNG", 150, 5, imgWidth, imgHeight);
+
+        // Business details (top left)
+        doc.setTextColor("#000000");
+        doc.setFontSize(12);
+        doc.text("Address: Uhuru St, in the building opposite Family Bank,", 14, 10);
+        doc.text("Second Floor, Thika", 14, 15);
+        doc.text("Phone: 254 757 939 067", 14, 20);
+        doc.text("Email: niccydjonsspa@gmail.com", 14, 25);
+
+        // Add watermark
+        doc.setTextColor(230, 230, 230);
+        doc.setFontSize(50);
+        doc.text("NICCYDJONSSPA", 40, 150, { angle: 45 });
+
+        // Set table styling
+        doc.setTextColor("#D4AF37");
+        doc.setFontSize(18);
+
+        const visibleRows = filteredRows;
+        const totalAmount = visibleRows.reduce((sum, row) => sum + row.amount + row.tip, 0);
+        const discountAmount = discount ? (totalAmount * Number(discount)) / 100 : 0;
+
+        autoTable(doc, {
+            head: [["Name", "Service Offered", "Date", "Amount (Ksh)", "Tip Left (Ksh)"]],
+            body: visibleRows.map(row => [row.name, row.service, row.date, row.amount, row.tip]),
+            startY: imgHeight + 30,
+            theme: "grid",
+            styles: { fontSize: 12 },
+            headStyles: { fillColor: "#000000", textColor: "#D4AF37" },
+        });
+
+        const finalY = (doc as any).lastAutoTable?.finalY || imgHeight + 40;
+        doc.setTextColor("#D4AF37");
+        doc.setFontSize(14);
+        doc.text(`Total Amount: Ksh ${totalAmount}`, 14, finalY + 10);
+        if (discount) {
+            doc.text(`Payout percentage: ${discount}%`, 14, finalY + 20);
+            doc.text(`Final Amount: Ksh ${discountAmount}`, 14, finalY + 30);
+        }
+
+        // Add handwritten signature at the bottom
+        const signatureY = 270; // Adjust to bottom
+        doc.setTextColor("#000000");
+        doc.setFontSize(20);
+        doc.setFont("DancingScript");
+        doc.text("Nancy", 14, signatureY); // Handwritten-style signature
+
+        doc.setFont("helvetica", "normal"); // Reset font
+        doc.setFontSize(12);
+        doc.text("Director of Spa", 14, signatureY + 10);
+
+        doc.save("NiccyDjons_services.pdf");
     };
-  };
+};
 
   return (
     <div className="bg-white p-6 rounded-md flex-1 m-4 mt-0 shadow relative">
