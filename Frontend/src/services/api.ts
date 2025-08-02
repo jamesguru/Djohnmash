@@ -1,6 +1,5 @@
 // services/api.js
 import axios from "axios";
-
 const NEXT_PUBLIC_API_BASE_URL="https://api.niccydjonsspa.com/api/v1"
 
 const api = axios.create({
@@ -52,6 +51,17 @@ export const addMember = async (data:any) => {
       throw error;
     }
   };
+
+
+  export const deleteService = async (id: string) => {
+  try {
+    const response = await api.delete(`/service/${id}`);
+    return response.data;
+  } catch (error) {
+    console.error("Error deleting service:", error);
+    throw error;
+  }
+};
 
 
   export const fetchServices = async () => {
