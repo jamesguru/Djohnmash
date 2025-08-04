@@ -182,22 +182,22 @@ const MassageServiceListPage = () => {
   };
 
   const columns: GridColDef[] = [
-   {
-  field: "name",
-  headerName: "Therapist",
-  width: 200,
-  renderCell: (params: any) => (
-    <div className="flex items-center gap-2">
-      {params.row.name}
-       
-      {isAdmin &&  params.row.isEdited && (
-        <span className="bg-red-500 text-white text-xs px-2 py-0.5 rounded-full animate-pulse">
-         {params.row.isEdited}
-        </span>
-      )}
-    </div>
-  ),
-}
+    {
+      field: "name",
+      headerName: "Therapist",
+      width: 200,
+      renderCell: (params: any) => (
+        <div className="flex items-center gap-2">
+          {params.row.name}
+
+          {isAdmin && params.row.isEdited && (
+            <span className="bg-red-500 text-white text-xs px-2 py-0.5 rounded-full animate-pulse">
+              {params.row.isEdited}
+            </span>
+          )}
+        </div>
+      ),
+    }
 
 
     ,
@@ -207,6 +207,23 @@ const MassageServiceListPage = () => {
     { field: "tip", headerName: "Tip Left (Ksh)", width: 120 },
     { field: "payoutPercentage", headerName: "Payout %", width: 100 },
     { field: "payoutAmount", headerName: "Payout Amount (Ksh)", width: 150 },
+    {
+      field: "Edited",
+      headerName: "Update",
+      width: 100,
+      renderCell: (params: any) => {
+
+
+        return (
+          <button
+            className="bg-blue-300 text-white px-3 py-1 rounded"
+            onClick={() => handleEdit(params.row)}
+          >
+            Edit
+          </button>
+        );
+      },
+    },
     ...(
       isAdmin
         ? [
@@ -262,12 +279,7 @@ const MassageServiceListPage = () => {
             width: 180,
             renderCell: (params: any) => (
               <div className="flex gap-2">
-                <button
-                  className="bg-blue-300 text-white px-3 py-1 rounded"
-                  onClick={() => handleEdit(params.row)}
-                >
-                  Edit
-                </button>
+
                 <button
                   className="bg-red-600 text-white px-2 py-1 rounded"
                   onClick={() => handleDelete(params.row._id)}
