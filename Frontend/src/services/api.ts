@@ -1,6 +1,8 @@
 // services/api.js
 import axios from "axios";
-const NEXT_PUBLIC_API_BASE_URL="https://api.niccydjonsspa.com/api/v1"
+// const NEXT_PUBLIC_API_BASE_URL="https://api.niccydjonsspa.com/api/v1"
+
+const NEXT_PUBLIC_API_BASE_URL="http://localhost:8800/api/v1"
 
 const api = axios.create({
   baseURL: NEXT_PUBLIC_API_BASE_URL,
@@ -51,6 +53,18 @@ export const addMember = async (data:any) => {
       throw error;
     }
   };
+
+
+export const updateService = async (id: string, data: any) => {
+  try {
+    const response = await api.put(`/service/${id}`, data);
+    return response.data;
+  } catch (error) {
+    console.error("Error updating service:", error);
+    throw error;
+  }
+};
+
 
 
   export const deleteService = async (id: string) => {

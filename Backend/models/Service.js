@@ -9,7 +9,7 @@ const serviceSchema = new mongoose.Schema({
   service: { type: String, required: true },
   payoutPercentage: { type: Number },
   payoutAmount: { type: Number, required: true },
-  
+  isEdited:  { type: String, default:""},
 },
   {
     timestamps: true,
