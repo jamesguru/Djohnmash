@@ -6,6 +6,8 @@ import membershipRoute from "./routes/membershipRoutes.js";
 import ratingRoute from "./routes/ratingRoutes.js";
 import authRoute from "./routes/authRoutes.js"
 import serviceRoute from "./routes/serviceRoute.js"
+import equipmentRoutes from './routes/equipmentRoutes.js';
+import attendanceRoutes from './routes/attendanceRoutes.js';
 
 const app = express();
 
@@ -25,6 +27,8 @@ app.use("/api/v1/booking", bookingRoute);
 app.use("/api/v1/membership", membershipRoute);
 app.use("/api/v1/rating", ratingRoute)
 app.use("/api/v1/service", serviceRoute)
+app.use('/api/v1/equipment', equipmentRoutes);
+app.use('/api/v1/attendance', attendanceRoutes);
 
 
 // Error middleware

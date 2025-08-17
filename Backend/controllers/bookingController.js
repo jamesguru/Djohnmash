@@ -10,6 +10,9 @@ export const createBooking = async (req, res) => {
   }
 };
 
+
+
+
 export const getBookings = async (req, res) => {
   try {
     const bookings = await Booking.find();

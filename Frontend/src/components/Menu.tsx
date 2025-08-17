@@ -45,14 +45,14 @@ const Menu = () => {
         },
         {
           icon: "/lesson.png",
-          label: "Packages & Offers",
-          href: "/list/packages",
+          label: "Staffs Management",
+          href: "/list/staffs",
           visible: ["admin", "teacher"],
         },
         {
           icon: "/exam.png",
-          label: "Bookings Management",
-          href: "/list/exams",
+          label: "Inventory Management",
+          href: "/list/inventory",
           visible: ["admin", "teacher", "student", "parent"],
         },
         {
