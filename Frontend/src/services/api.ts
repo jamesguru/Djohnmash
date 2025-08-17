@@ -308,7 +308,7 @@ export const getStaffAttendance = async (filters: AttendanceFilters = {}): Promi
   const { date, search, todayOnly } = filters;
   const params = new URLSearchParams();
   
-  if (date) params.append('date', date.toISOString());
+if (date) params.append('date', (date as Date).toISOString());
   if (search) params.append('search', search);
   if (todayOnly) params.append('todayOnly', 'true');
   
